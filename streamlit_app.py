@@ -1,16 +1,23 @@
-# 最初に google-generativeai をインストール
-# requirements.txtに追加する場合は "google-generativeai" を記載してください
-# または下記のように直接インストール
-# pip install google-generativeai
+# 最初に google-generativeai がインストールされていない場合の対策
+# Streamlitの「requirements.txt」に 'google-generativeai' を記載してください
+# または、以下のようにPythonコード内で自動インストールすることもできます
 
 import streamlit as st
-import google.generativeai as genai
+
+# google-generativeaiが未インストールの場合、自動インストール
+try:
+    import google.generativeai as genai
+except ModuleNotFoundError:
+    import subprocess
+    import sys
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "google-generativeai"])
+    import google.generativeai as genai
 
 st.title("💬 Chatbot (Gemini API版)")
 st.write(
     "このチャットボットはGoogle Gemini APIを使って応答を生成します。"
     "利用するにはGemini APIキーが必要です。[Gemini APIキーはこちら](https://aistudio.google.com/app/apikey)から取得可能です。"
-    "事前に `pip install google-generativeai` を実行してライブラリをインストールしてください。"
+    "事前に `pip install google-generativeai` を実行してください。"
 )
 
 # Gemini APIキー入力
