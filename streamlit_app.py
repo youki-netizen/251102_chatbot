@@ -52,7 +52,7 @@ else:
                 history.append({"role": "model", "parts": [m["content"]]})
 
         # Gemini chatモデル作成
-        model = genai.GenerativeModel("gemini-pro")
+        model = genai.GenerativeModel("gemini-2.5-pro")
         chat = model.start_chat(history=history[:-1])
 
         # Gemini APIで応答生成
